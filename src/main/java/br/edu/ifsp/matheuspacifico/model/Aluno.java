@@ -74,4 +74,15 @@ public class Aluno {
     public void setNota3(BigDecimal nota3) {
         this.nota3 = nota3;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Dados do aluno:\n");
+        builder.append("Nome: ").append(nome).append("\n");
+        builder.append("Email: ").append(email).append("\n");
+        builder.append("Ra: ").append(ra).append("\n");
+        builder.append("Notas: ").append(nota1).append("-").append(nota2).append("-").append(nota3).append("\n");
+        return builder.toString();
+    }
 }
