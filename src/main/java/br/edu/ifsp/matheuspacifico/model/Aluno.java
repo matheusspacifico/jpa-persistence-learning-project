@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Entity
 @Table(name = "alunos")
@@ -84,5 +85,17 @@ public class Aluno {
         builder.append("Ra: ").append(ra).append("\n");
         builder.append("Notas: ").append(nota1).append("-").append(nota2).append("-").append(nota3).append("\n");
         return builder.toString();
+    }
+
+    public String getSituacao() {
+        BigDecimal media = (nota1.add(nota2.add(nota3))).divide(BigDecimal.valueOf(3));
+
+        if (media.compareTo(BigDecimal.valueOf(4)) < 0) {
+            return "Reprovado";
+        } else if (media.compareTo(BigDecimal.valueOf(4)) >=  0 && media.compareTo(BigDecimal.valueOf(6)) < 0) {
+            return "Recuperação";
+        }
+
+        return "Aprovado";
     }
 }

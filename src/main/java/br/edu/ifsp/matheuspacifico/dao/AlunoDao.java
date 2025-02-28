@@ -26,7 +26,7 @@ public class AlunoDao {
 
     public Aluno buscarPorNome(String nome) {
         String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
-        return em.createQuery(jpql, Aluno.class).setParameter("n", nome).getResultList().getFirst();
+        return em.createQuery(jpql, Aluno.class).setParameter("n", nome).getResultList().get(0);
     }
 
     public List<Aluno> listarTodos() {

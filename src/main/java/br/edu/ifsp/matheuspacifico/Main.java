@@ -9,6 +9,7 @@ import jakarta.persistence.Persistence;
 
 import java.math.BigDecimal;
 import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -28,6 +29,7 @@ public class Main {
 
             System.out.print("Digite a opção desejada: ");
             int opcao = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -137,5 +139,29 @@ public class Main {
         dao.alterar(aluno);
         em.getTransaction().commit();
         System.out.println("Aluno alterado com sucesso!");
+    }
+
+    private static void buscarAlunoPorNome(Scanner scanner, AlunoDao dao) {
+        System.out.println("CONSULTAR ALUNO:");
+        System.out.print("Digite o nome: ");
+        String nome = scanner.nextLine();
+
+        Aluno aluno = dao.buscarPorNome(nome);
+        if (aluno == null) {
+            System.out.println("Aluno não encontrado!");
+            return;
+        }
+
+        System.out.println(aluno.toString());
+    }
+
+    private static void listarAlunos(AlunoDao dao) {
+        System.out.println("Exibindo todos os alunos: ");
+        List<Aluno> alunos = dao.listarTodos();
+
+        alunos.forEach(a -> {
+            System.out.print(a.toString());
+            System.out.println("Situação: " + a.getSituacao() + "\n");
+        });
     }
 }
